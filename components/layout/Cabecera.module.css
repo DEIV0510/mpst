@@ -1,0 +1,324 @@
+.cabecera {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 90;
+  height: var(--cabecera);
+  border-bottom: 1px solid transparent;
+  background: rgb(255 255 255 / 0);
+  transition:
+    height 0.4s var(--ease),
+    background-color 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.cabecera[data-compacta] {
+  height: calc(var(--cabecera) - 12px);
+  background: rgb(255 255 255 / 0.94);
+  border-bottom-color: var(--gris-200);
+  box-shadow: 0 10px 30px -24px rgb(3 26 74 / 0.5);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.marca {
+  flex: none;
+  display: block;
+  width: 52px;
+  border-radius: 50%;
+  transition: width 0.4s var(--ease);
+}
+
+.cabecera[data-compacta] .marca {
+  width: 46px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+/* ── Navegación de escritorio ── */
+
+.nav {
+  display: none;
+  margin-inline: auto;
+}
+
+.nav ul {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.enlace {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--tinta);
+  text-decoration: none;
+  transition: color 0.25s var(--ease);
+}
+
+/* Indicador de sección activa: trazo verde que se extiende desde el centro */
+.enlace::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--verde-600);
+  transform: scaleX(0);
+  transition: transform 0.45s var(--ease);
+}
+
+.enlace[data-activo] {
+  color: var(--azul-800);
+}
+
+.enlace[data-activo]::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .enlace:hover {
+    color: var(--azul-800);
+  }
+
+  .enlace:hover::after {
+    transform: scaleX(0.35);
+  }
+
+  .enlace[data-activo]:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.ctaCorto {
+  display: none;
+}
+
+/* Barra de progreso de lectura (CSS puro; si el navegador no soporta
+   animaciones ligadas al scroll, simplemente no aparece) */
+.progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--verde-600);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@supports (animation-timeline: scroll()) {
+  .cabecera[data-compacta] .progreso {
+    opacity: 1;
+  }
+
+  .progreso {
+    animation: avance linear both;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes avance {
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* ── Botón de menú ── */
+
+.botonMenu {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1.5px solid var(--gris-200);
+  border-radius: var(--r-2);
+  background: var(--blanco);
+  color: var(--azul-800);
+}
+
+.lineas {
+  display: grid;
+  gap: 6px;
+  width: 20px;
+}
+
+.lineas span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.lineas span:last-child {
+  width: 13px;
+  justify-self: end;
+}
+
+@media (max-width: 519px) {
+  .ctaLargo {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .ctaCorto {
+    display: inline;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marca {
+    width: 60px;
+  }
+
+  .cabecera[data-compacta] .marca {
+    width: 50px;
+  }
+
+  .nav {
+    display: block;
+  }
+
+  .botonMenu {
+    display: none;
+  }
+}
+
+/* ── Menú móvil (dialog modal) ── */
+
+.menu {
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--blanco);
+  color: var(--tinta);
+}
+
+.menu::backdrop {
+  background: rgb(3 26 74 / 0.4);
+}
+
+.menu[open] {
+  animation: bajar 0.45s var(--ease);
+}
+
+@keyframes bajar {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+.menuCaja {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.menuCabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--cabecera);
+  border-bottom: 1px solid var(--gris-200);
+}
+
+.logoMenu {
+  display: block;
+  width: 52px;
+  height: auto;
+}
+
+.cerrar {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1.5px solid var(--gris-200);
+  border-radius: var(--r-2);
+  background: var(--blanco);
+  color: var(--azul-800);
+}
+
+.menuLista {
+  padding-block: 1.5rem;
+}
+
+.menuLista li {
+  border-bottom: 1px solid var(--gris-100);
+  animation: entrar 0.5s var(--ease) both;
+  animation-delay: calc(0.05s + var(--i) * 0.045s);
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.menuEnlace {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 0;
+  font-size: clamp(1.625rem, 1.2rem + 2vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--azul-900);
+  text-decoration: none;
+}
+
+.menuEnlace[data-activo] .menuIndice {
+  color: var(--verde-700);
+}
+
+.menuIndice {
+  min-width: 2ch;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gris-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.menuPie {
+  margin-top: auto;
+}

@@ -1,0 +1,167 @@
+.operacion {
+  overflow: clip;
+  background:
+    radial-gradient(80% 60% at 85% 0%, rgb(23 59 112 / 0.55), transparent 70%),
+    var(--azul-900);
+}
+
+.cabeza {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 54rem;
+}
+
+.titulo {
+  color: var(--blanco);
+}
+
+.entrada {
+  max-width: 36rem;
+}
+
+/* ── Flota: tres vistas apoyadas sobre la misma ruta ── */
+
+.flota {
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+}
+
+.vistas {
+  display: grid;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.ruta {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  /* En móvil: fila deslizable con imán (sin JavaScript); asoma la lámina siguiente */
+  .vistas {
+    grid-auto-flow: column;
+    grid-auto-columns: min(74%, 320px);
+    gap: 1rem;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 12px var(--gutter) 14px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .vistas::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vista {
+    scroll-snap-align: start;
+  }
+}
+
+@media (min-width: 768px) {
+  .vistas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+}
+
+@media (hover: hover) {
+  .vista {
+    transition: transform 0.5s var(--ease);
+  }
+
+  .vista:hover {
+    transform: translateY(-6px);
+  }
+}
+
+/* ── Proceso: estaciones de la ruta ── */
+
+.proceso {
+  margin-top: clamp(3.5rem, 2rem + 5vw, 6rem);
+}
+
+.procesoTitulo {
+  font-size: var(--t-h3);
+  letter-spacing: -0.025em;
+  color: var(--blanco);
+}
+
+.pasos {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+/* Vía vertical en móvil */
+.pasos::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1.5px;
+  background: rgb(255 255 255 / 0.22);
+}
+
+.paso {
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.nodo {
+  position: absolute;
+  left: calc(-2rem + 0px);
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--verde-400);
+  border-radius: 50%;
+  background: var(--azul-900);
+}
+
+.numero {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--verde-400);
+  font-variant-numeric: tabular-nums;
+}
+
+.pasoTitulo {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.pasoTexto {
+  max-width: 22rem;
+  color: var(--azul-300);
+}
+
+@media (min-width: 768px) {
+  .pasos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    padding-left: 0;
+    padding-top: 2.25rem;
+  }
+
+  /* Vía horizontal en tableta y escritorio */
+  .pasos::before {
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: auto;
+    width: auto;
+    height: 1.5px;
+  }
+
+  .nodo {
+    left: 0;
+    top: -2.25rem;
+  }
+}

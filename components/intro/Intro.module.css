@@ -1,0 +1,111 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: none;
+  place-items: center;
+  background: var(--blanco);
+  pointer-events: none;
+}
+
+/* Visible solo durante la carga inicial (clase puesta por el script de app/layout.tsx) */
+:global(html.intro-activa) .intro {
+  display: grid;
+  /* Red de seguridad: se retira sola aunque algo falle */
+  animation: retirada 0.5s var(--ease-in-out) 3s forwards;
+}
+
+/* Salida: la cortina sube y descubre la portada, ya pintada debajo */
+:global(html.intro-activa.intro-sale) .intro {
+  animation: telon 0.65s var(--ease-in-out) forwards;
+}
+
+@keyframes telon {
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+  }
+}
+
+@keyframes retirada {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.escena {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+}
+
+.logo {
+  width: 140px;
+  animation: aparecer 0.6s var(--ease) both;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+/* La línea de ECG del logotipo, trazada una sola vez */
+.pulso {
+  width: 168px;
+  height: 56px;
+  overflow: visible;
+}
+
+.pulso path {
+  stroke: var(--verde-600);
+  stroke-width: 2.4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: trazar 0.8s var(--ease-in-out) 0.15s forwards;
+}
+
+@keyframes trazar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Progreso: avanza mientras carga y se completa al salir */
+.barra {
+  display: block;
+  width: 168px;
+  height: 2px;
+  overflow: hidden;
+  background: var(--gris-100);
+}
+
+.barra span {
+  display: block;
+  height: 100%;
+  background: var(--azul-800);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  animation: progreso 1.6s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+:global(html.intro-sale) .barra span {
+  animation: none;
+  transform: scaleX(1);
+  transition: transform 0.25s ease-out;
+}
+
+@keyframes progreso {
+  to {
+    transform: scaleX(0.85);
+  }
+}

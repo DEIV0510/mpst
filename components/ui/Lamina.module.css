@@ -1,0 +1,72 @@
+.lamina {
+  --marca: var(--azul-800);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--blanco);
+  border: 1px solid var(--gris-200);
+  border-radius: var(--r-1);
+  box-shadow: var(--sombra-1);
+}
+
+/* Marcas de registro: escuadras finas fuera de cada esquina */
+.marcas {
+  position: absolute;
+  inset: -9px;
+  pointer-events: none;
+  --l: 14px;
+  --g: 1.5px;
+  background:
+    linear-gradient(var(--marca) 0 0) top left / var(--l) var(--g),
+    linear-gradient(var(--marca) 0 0) top left / var(--g) var(--l),
+    linear-gradient(var(--marca) 0 0) top right / var(--l) var(--g),
+    linear-gradient(var(--marca) 0 0) top right / var(--g) var(--l),
+    linear-gradient(var(--marca) 0 0) bottom left / var(--l) var(--g),
+    linear-gradient(var(--marca) 0 0) bottom left / var(--g) var(--l),
+    linear-gradient(var(--marca) 0 0) bottom right / var(--l) var(--g),
+    linear-gradient(var(--marca) 0 0) bottom right / var(--g) var(--l);
+  background-repeat: no-repeat;
+  opacity: 0.55;
+}
+
+:global(.oscuro) .lamina {
+  --marca: var(--verde-400);
+  border-color: transparent;
+  box-shadow: var(--sombra-2);
+}
+
+.lienzo {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--r-1) var(--r-1) 0 0;
+}
+
+.lienzo :where(img) {
+  width: 100%;
+  height: auto;
+}
+
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--gris-100);
+  font-size: var(--t-label);
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.titulo {
+  font-weight: 800;
+  color: var(--azul-800);
+}
+
+.detalle {
+  font-weight: 600;
+  color: var(--gris-500);
+}

@@ -1,0 +1,26 @@
+# dependencias
+/node_modules
+
+# build
+/.next/
+/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# entorno local (nunca subir secretos)
+.env
+.env*.local
+!.env.example
+
+# logs
+npm-debug.log*
+
+# sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# herramientas
+/.vercel
+/.claude
+/qa

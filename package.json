@@ -1,0 +1,31 @@
+{
+  "name": "mpst-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web corporativo de MPST — Medical Products & Solutions Team S.A.S.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "media": "node scripts/prepare-media.mjs"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^10.13.0",
+    "eslint-config-next": "16.4.2",
+    "typescript": "^5.9.0"
+  }
+}

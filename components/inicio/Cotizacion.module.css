@@ -1,0 +1,168 @@
+.cotizacion {
+  background: var(--blanco);
+}
+
+.rejilla {
+  display: grid;
+}
+
+/* ── Panel azul ── */
+
+.panel {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  margin-inline: calc(-1 * var(--gutter));
+  padding: clamp(2.5rem, 2rem + 3vw, 4rem) var(--gutter) 5rem;
+  background:
+    repeating-linear-gradient(to right, rgb(255 255 255 / 0.045) 0 1px, transparent 1px 56px),
+    var(--azul-800);
+}
+
+.titulo {
+  max-width: 16ch;
+  color: var(--blanco);
+}
+
+.bloque {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.subtitulo {
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--azul-300);
+}
+
+.sugerencias {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.sugerencias li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-weight: 600;
+}
+
+.sugerencias li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 10px;
+  height: 2px;
+  background: var(--verde-400);
+}
+
+.canales {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.canal {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 56px;
+  padding: 0.6rem 0;
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+a.canal:hover .canalValor {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.canalIcono {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--verde-400);
+}
+
+.canalEtiqueta {
+  display: block;
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--azul-300);
+}
+
+.canalValor {
+  display: block;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* ── Formulario como lámina ── */
+
+.formulario {
+  position: relative;
+  z-index: 1;
+  margin-top: -3rem;
+  padding: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
+  border: 1px solid var(--gris-200);
+  border-radius: var(--r-1);
+  background: var(--blanco);
+  box-shadow: var(--sombra-2);
+}
+
+.marcas {
+  position: absolute;
+  inset: -9px;
+  pointer-events: none;
+  --l: 14px;
+  --g: 1.5px;
+  --m: var(--azul-800);
+  background:
+    linear-gradient(var(--m) 0 0) top left / var(--l) var(--g),
+    linear-gradient(var(--m) 0 0) top left / var(--g) var(--l),
+    linear-gradient(var(--m) 0 0) top right / var(--l) var(--g),
+    linear-gradient(var(--m) 0 0) top right / var(--g) var(--l),
+    linear-gradient(var(--m) 0 0) bottom left / var(--l) var(--g),
+    linear-gradient(var(--m) 0 0) bottom left / var(--g) var(--l),
+    linear-gradient(var(--m) 0 0) bottom right / var(--l) var(--g),
+    linear-gradient(var(--m) 0 0) bottom right / var(--g) var(--l);
+  background-repeat: no-repeat;
+  opacity: 0.55;
+}
+
+.formTitulo {
+  margin-bottom: 0.5rem;
+  font-size: var(--t-h3);
+  letter-spacing: -0.025em;
+  color: var(--azul-900);
+}
+
+@media (min-width: 1024px) {
+  .rejilla {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: start;
+  }
+
+  .panel {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+    align-self: stretch;
+    /* El formulario empieza 4rem más abajo y sobresale lo mismo por debajo del panel */
+    margin: 0 0 4rem;
+    padding: clamp(3rem, 2rem + 3vw, 4.5rem) calc(100% / 6 + var(--col-gap) + 1.5rem) 4rem clamp(2rem, 4vw, 3.5rem);
+    border-radius: var(--r-3);
+  }
+
+  .formulario {
+    grid-column: 6 / -1;
+    grid-row: 1;
+    margin: 4rem 0 0;
+  }
+}

@@ -1,0 +1,134 @@
+.nosotros {
+  background: var(--blanco);
+}
+
+.apertura {
+  display: grid;
+  gap: clamp(3rem, 8vw, 4rem);
+}
+
+.declaracion {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.titulo {
+  max-width: 17ch;
+}
+
+/* Dos prendas como láminas superpuestas, con desfase vertical */
+.dotacion {
+  position: relative;
+  display: grid;
+  grid-template-columns: 58fr 42fr;
+  align-items: end;
+  max-width: 560px;
+  padding-bottom: 1rem;
+}
+
+.polo {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+}
+
+.segunda {
+  grid-column: 2;
+  grid-row: 1;
+  margin-left: -14%;
+  margin-bottom: -1rem;
+  z-index: 2;
+}
+
+/* ── Principios: filas editoriales de gran formato ── */
+
+.principios {
+  margin-top: clamp(3.5rem, 2rem + 6vw, 6.5rem);
+  border-bottom: 1px solid var(--gris-200);
+}
+
+.principio {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--gris-200);
+}
+
+/* Trazo verde que recorre la fila al señalarla */
+.principio::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 2px;
+  background: var(--verde-600);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.7s var(--ease);
+}
+
+.numero {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--verde-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.palabra {
+  font-size: clamp(2.125rem, 1.3rem + 3.6vw, 4.5rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--azul-900);
+  transition: color 0.35s var(--ease);
+}
+
+.texto {
+  grid-column: 2;
+  max-width: 30rem;
+  color: var(--gris-500);
+}
+
+@media (hover: hover) {
+  .principio:hover::before {
+    transform: scaleX(1);
+  }
+
+  .principio:hover .palabra {
+    color: var(--azul-800);
+  }
+}
+
+@media (min-width: 768px) {
+  .principio {
+    grid-template-columns: 4rem minmax(0, 7fr) minmax(0, 4fr);
+    align-items: center;
+    padding: 1.75rem 0;
+  }
+
+  .texto {
+    grid-column: 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .apertura {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: center;
+  }
+
+  .declaracion {
+    grid-column: 1 / span 7;
+  }
+
+  .dotacion {
+    grid-column: 8 / -1;
+    justify-self: end;
+    width: 100%;
+  }
+}
