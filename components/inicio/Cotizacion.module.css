@@ -2,6 +2,18 @@
   background: var(--blanco);
 }
 
+/* Móvil y tableta: sin franja blanca entre Cobertura y el panel azul, y el
+   formulario más cerca (las pistas ya están en el texto de ejemplo del mensaje) */
+@media (max-width: 1023px) {
+  .cotizacion {
+    padding-top: 0;
+  }
+
+  .consejos {
+    display: none;
+  }
+}
+
 .rejilla {
   display: grid;
 }
@@ -109,7 +121,7 @@ a.canal:hover .canalValor {
   position: relative;
   z-index: 1;
   margin-top: -3rem;
-  padding: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
+  padding: clamp(1.25rem, 0.6rem + 2.8vw, 2.75rem);
   border: 1px solid var(--gris-200);
   border-radius: var(--r-1);
   background: var(--blanco);

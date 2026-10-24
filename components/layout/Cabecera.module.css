@@ -226,6 +226,9 @@
   border: 0;
   background: var(--blanco);
   color: var(--tinta);
+  /* Teléfono en horizontal: el menú se desplaza dentro de sí mismo */
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .menu::backdrop {
@@ -320,5 +323,33 @@
 }
 
 .menuPie {
+  display: grid;
+  gap: 0.75rem;
   margin-top: auto;
+}
+
+.menuCanales {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.menuCanal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 52px;
+  border: 1.5px solid var(--gris-200);
+  border-radius: var(--r-2);
+  font-weight: 700;
+  color: var(--azul-800);
+  text-decoration: none;
+}
+
+.menuCanal svg {
+  width: 22px;
+  height: 22px;
+  color: var(--verde-700);
 }

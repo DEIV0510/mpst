@@ -1,0 +1,72 @@
+.boton {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--verde-700);
+  color: var(--blanco);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 28px -10px rgb(3 26 74 / 0.55);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.25s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.icono {
+  width: 28px;
+  height: 28px;
+}
+
+/* En móvil solo el icono; en pantallas anchas, píldora con texto */
+.texto {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .boton {
+    width: auto;
+    height: 52px;
+    padding: 0 1.25rem 0 1rem;
+    border-radius: 999px;
+  }
+
+  .icono {
+    width: 24px;
+    height: 24px;
+  }
+
+  .texto {
+    display: inline;
+  }
+}
+
+@media (hover: hover) {
+  .boton:hover {
+    background: #0f5a27;
+  }
+}
+
+.boton:active {
+  transform: scale(0.96);
+}
+
+/* Con el menú móvil abierto no compite con él */
+:global(html.menu-abierto) .boton {
+  visibility: hidden;
+}
+
+@media print {
+  .boton {
+    display: none;
+  }
+}

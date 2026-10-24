@@ -15,7 +15,7 @@ export function AvisoPendientes() {
       style={{
         position: "fixed",
         right: 12,
-        bottom: 12,
+        bottom: 84,
         zIndex: 110,
         maxWidth: "min(92vw, 360px)",
         background: "#fffaeb",

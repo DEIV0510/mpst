@@ -34,7 +34,7 @@ export function Cotizacion() {
             Cuéntanos qué necesitas y nuestro equipo comercial te orientará sobre las opciones disponibles.
           </p>
 
-          <div className={s.bloque}>
+          <div className={`${s.bloque} ${s.consejos}`}>
             <h3 className={s.subtitulo}>Para una cotización más precisa, incluye</h3>
             <ul role="list" className={s.sugerencias}>
               {sugerencias.map((t) => (

@@ -45,7 +45,7 @@ export function Heroe() {
             <Image
               src={flotaLateral}
               alt="Furgoneta de la flota corporativa de MPST, rotulada con el logotipo y el nombre de la empresa."
-              sizes="(max-width: 1023px) calc(100vw - 2rem), (max-width: 1320px) 46vw, 600px"
+              sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1320px) 46vw, 600px"
               loading="eager"
               fetchPriority="high"
               quality={90}

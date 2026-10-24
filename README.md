@@ -119,6 +119,16 @@ COTIZACION_CORREO_REMITENTE=Web MPST <web@…>
 Protecciones incluidas: validación en servidor, campo trampa contra robots, límite de longitud y comprobación de
 origen de Next.js. No incluye limitación de frecuencia por IP (requiere un almacén externo).
 
+## Móvil
+
+- Portada compacta: líneas de suministro en cuadrícula 2×2 y titular con saltos de línea fijos (sin desplazamientos
+  al cargar la fuente).
+- Soluciones: número, título y dibujo en una fila; descripción y enlace a todo el ancho.
+- Operación: fila deslizable con imán (sin JavaScript) en lugar de tres láminas apiladas.
+- Cotización: el panel azul sigue directamente a Cobertura y el formulario aparece antes.
+- Menú a pantalla completa con `<dialog>`, desplazable en horizontal; cuando haya WhatsApp o teléfono
+  confirmados, muestra accesos directos y aparece un botón flotante de WhatsApp (`components/layout/BotonWhatsApp.tsx`).
+
 ## Dominio y SEO
 
 `NEXT_PUBLIC_SITE_URL=https://www.dominio-definitivo.com` activa canonical, `sitemap.xml`, `robots.txt` con sitemap
@@ -129,7 +139,8 @@ completen los datos de contacto.
 ## Pruebas realizadas (23-10-2026)
 
 - `npm run build` y `npm run lint` sin errores ni avisos.
-- Revisión visual en 320, 375, 768, 1024, 1280 y 1440 px: sin desbordamiento horizontal.
+- Revisión visual en 320, 375, 390, 430, 768, 1024, 1280 y 1440 px y en teléfono horizontal (740×360): sin
+  desbordamiento horizontal y con áreas táctiles de al menos 44 px.
 - Menú móvil (abre, cierra con enlace/Esc, bloquea el fondo, devuelve el foco), enlaces internos con foco, enlace
   «Saltar al contenido», preselección de categoría desde Soluciones y consulta de cobertura que precarga el mensaje.
 - Formulario: errores por campo con icono y texto, foco al primer error, formatos de correo y teléfono, aviso honesto
@@ -138,6 +149,7 @@ completen los datos de contacto.
   movimiento reducido.
 - Lighthouse 13.5 sobre la compilación de producción en local:
   - Escritorio: Rendimiento 100 · Accesibilidad 100 · Buenas prácticas 100 · SEO 100 (LCP 0,6 s, CLS 0).
-  - Móvil (simulado, 4G lenta y CPU ×4): Rendimiento 93–94 · Accesibilidad 100 · Buenas prácticas 100 · SEO 100;
-    CLS 0, TBT 30–40 ms; **LCP simulado 3,0–3,2 s** (la foto principal pesa ~21 KB; el tiempo lo marca el
-    JavaScript base de React/Next que el simulador sitúa antes del pintado). Sin limitación, el LCP observado es ~0,2 s.
+  - Móvil (simulado, 4G lenta y CPU ×4, tras la adaptación móvil): Rendimiento 95 · Accesibilidad 100 ·
+    Buenas prácticas 100 · SEO 100; CLS 0, TBT 40–90 ms; **LCP simulado 2,9 s** (la foto principal pesa ~21 KB; el
+    tiempo lo marca el JavaScript base de React/Next que el simulador sitúa antes del pintado). Sin limitación, el
+    LCP observado es ~0,2 s.

@@ -6,10 +6,12 @@ import { Nosotros } from "@/components/inicio/Nosotros";
 import { Operacion } from "@/components/inicio/Operacion";
 import { Soluciones } from "@/components/inicio/Soluciones";
 import { Intro } from "@/components/intro/Intro";
+import { BotonWhatsApp } from "@/components/layout/BotonWhatsApp";
 import { Cabecera } from "@/components/layout/Cabecera";
 import { Pie } from "@/components/layout/Pie";
 import { FocoAncla } from "@/components/ui/FocoAncla";
 import { Revelador } from "@/components/ui/Revelador";
+import { canales } from "@/config/sitio";
 import { datosOrganizacion } from "@/lib/seo";
 
 export default function Inicio() {
@@ -19,7 +21,7 @@ export default function Inicio() {
         Saltar al contenido
       </a>
       <Intro />
-      <Cabecera />
+      <Cabecera canales={canales().filter((c) => c.tipo === "whatsapp" || c.tipo === "telefono")} />
       <main id="contenido">
         <Heroe />
         <Soluciones />
@@ -29,6 +31,7 @@ export default function Inicio() {
         <Cotizacion />
       </main>
       <Pie />
+      <BotonWhatsApp />
       <Revelador />
       <FocoAncla />
       <AvisoPendientes />

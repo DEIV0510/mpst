@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { Canal } from "@/config/sitio";
 import { Logo } from "@/components/marca/Logo";
 import { Boton } from "@/components/ui/Boton";
-import { IconoCerrar } from "@/components/ui/Iconos";
+import { IconoCerrar, IconoTelefono, IconoWhatsApp } from "@/components/ui/Iconos";
 import { navegacion, type IdNavegacion } from "./navegacion";
 import s from "./Cabecera.module.css";
 
-export function Cabecera() {
+/** `canales`: WhatsApp y teléfono confirmados (vacío mientras no existan). */
+export function Cabecera({ canales = [] }: { canales?: Canal[] }) {
   const [compacta, setCompacta] = useState(false);
   const [activa, setActiva] = useState<IdNavegacion>("inicio");
   const [menu, setMenu] = useState(false);
@@ -157,6 +159,24 @@ export function Cabecera() {
             <Boton href="#cotizacion" ancho onClick={cerrarMenu}>
               Solicitar cotización
             </Boton>
+            {canales.length ? (
+              <ul role="list" className={s.menuCanales}>
+                {canales.map((c) => (
+                  <li key={c.tipo}>
+                    <a
+                      href={c.href}
+                      className={s.menuCanal}
+                      onClick={cerrarMenu}
+                      {...(c.externo ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      {c.tipo === "whatsapp" ? <IconoWhatsApp /> : <IconoTelefono />}
+                      {c.tipo === "whatsapp" ? "WhatsApp" : "Llamar"}
+                      <span className="sr-only">: {c.valor}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
       </dialog>

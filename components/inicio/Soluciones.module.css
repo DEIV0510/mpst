@@ -95,6 +95,49 @@
   display: none;
 }
 
+/* Móvil: número, título y dibujo en la primera fila; texto y enlace a todo el ancho debajo */
+@media (max-width: 639px) {
+  .item {
+    grid-template-columns: 2rem minmax(0, 1fr) 64px;
+    grid-template-areas:
+      "indice nombre miniatura"
+      ".      texto  texto"
+      ".      accion accion";
+    align-items: center;
+    row-gap: 0.35rem;
+    padding-block: 1.25rem;
+  }
+
+  .contenido {
+    display: contents;
+  }
+
+  .indice {
+    grid-area: indice;
+    padding-top: 0;
+  }
+
+  .nombre {
+    grid-area: nombre;
+  }
+
+  .descripcion {
+    grid-area: texto;
+    margin-top: 0;
+  }
+
+  .accion {
+    grid-area: accion;
+    justify-self: start;
+    margin-top: 0;
+  }
+
+  .miniatura {
+    grid-area: miniatura;
+    padding: 4px;
+  }
+}
+
 @media (min-width: 640px) {
   .item {
     grid-template-columns: 3rem minmax(0, 1fr) 132px;

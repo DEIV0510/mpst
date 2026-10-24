@@ -55,7 +55,7 @@
 .columna a {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 44px;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--blanco);

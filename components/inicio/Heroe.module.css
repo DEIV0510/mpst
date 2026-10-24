@@ -28,7 +28,7 @@
 .rejilla {
   position: relative;
   display: grid;
-  gap: clamp(2.5rem, 6vw, 3.5rem);
+  gap: clamp(2.25rem, 6vw, 3.5rem);
 }
 
 /* ── Texto ── */
@@ -218,19 +218,19 @@
   transform: none;
 }
 
-@media (max-width: 419px) {
-  .lineas ol {
-    grid-template-columns: 1fr;
-  }
-
-  .lineas li:nth-child(even) .linea {
-    padding-left: 0.25rem;
-    border-left: 0;
+/* Móvil y tableta: 2×2 compacto, número sobre el nombre (sin flecha) */
+@media (max-width: 1023px) {
+  .linea {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: 0.15rem;
+    min-height: 60px;
+    padding-block: 0.7rem;
+    font-size: 0.875rem;
   }
 
   .flecha {
-    opacity: 1;
-    transform: none;
+    display: none;
   }
 }
 
