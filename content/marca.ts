@@ -1,24 +1,30 @@
+import type { NombreIcono } from "@/components/ui/IconosLinea";
+
 /**
  * Atributos que la identidad de MPST propone comunicar (calidad,
  * cumplimiento, confianza y distribución médica especializada). Se redactan
  * como compromisos de la marca: sin cifras, certificaciones ni plazos.
  */
-export const principios = [
+export const principios: { titulo: string; texto: string; icono: NombreIcono }[] = [
   {
     titulo: "Calidad",
     texto: "Productos adecuados para el uso clínico e institucional, elegidos con criterio.",
+    icono: "calidad",
   },
   {
     titulo: "Cumplimiento",
     texto: "Compromiso con lo acordado, desde la cotización hasta la entrega.",
+    icono: "cumplimiento",
   },
   {
     titulo: "Confianza",
     texto: "Relaciones comerciales claras y un equipo que acompaña cada solicitud.",
+    icono: "confianza",
   },
   {
     titulo: "Especialización",
     texto: "Distribución médica especializada: una operación enfocada en el sector salud.",
+    icono: "especializacion",
   },
 ];
 
@@ -39,5 +45,33 @@ export const proceso = [
   {
     titulo: "Entrega",
     texto: "Coordinamos el despacho directamente con tu institución.",
+  },
+];
+
+/**
+ * Panel «MPST de un vistazo». Solo datos confirmados, sin cifras: cuando la
+ * empresa entregue números reales (clientes, ciudades, vehículos…), se
+ * añaden aquí como nuevas tarjetas.
+ */
+export const vistazo: { titulo: string; detalle: string[]; icono: NombreIcono }[] = [
+  {
+    titulo: "Líneas de producto",
+    detalle: ["Medicamentos", "Dispositivos médicos", "Material quirúrgico", "Insumos hospitalarios"],
+    icono: "productos",
+  },
+  {
+    titulo: "Atendemos a",
+    detalle: ["Instituciones de salud", "Profesionales de la salud"],
+    icono: "clientes",
+  },
+  {
+    titulo: "Operación",
+    detalle: ["Vehículos identificados con la marca", "Personal con dotación MPST"],
+    icono: "operacion",
+  },
+  {
+    titulo: "Atención comercial",
+    detalle: ["Cotización en línea", "Orientación del equipo comercial"],
+    icono: "asesoria",
   },
 ];

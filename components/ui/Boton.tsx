@@ -1,7 +1,7 @@
 import { IconoFlecha, IconoFlechaAbajo } from "./Iconos";
 import s from "./Boton.module.css";
 
-type Variante = "primario" | "secundario" | "texto" | "claro";
+type Variante = "primario" | "secundario" | "texto" | "claro" | "contorno-claro";
 
 /**
  * Enlace con aspecto de botón (todas las acciones de la página llevan a

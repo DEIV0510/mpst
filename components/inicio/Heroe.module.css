@@ -1,75 +1,189 @@
 .heroe {
   position: relative;
-  padding-top: calc(var(--cabecera) + clamp(1.75rem, 0.8rem + 4vw, 4.5rem));
-  background: var(--blanco);
+  padding-block: clamp(2.25rem, 1rem + 5vw, 4.5rem) clamp(3rem, 1.5rem + 6vw, 6rem);
+  background: linear-gradient(180deg, var(--azul-50) 0%, var(--azul-50) 55%, var(--blanco) 100%);
   overflow: clip;
 }
 
-/* Retícula técnica de 12 columnas, apenas visible y desvanecida hacia abajo */
-.reticula {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 82%;
-  max-width: var(--max);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  --columnas: 4;
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--gris-100) 0 1px,
-    transparent 1px calc((100% - var(--gutter) * 2) / var(--columnas))
-  );
-  background-origin: content-box;
-  background-clip: content-box;
-  mask-image: linear-gradient(to bottom, #000 30%, transparent);
-  pointer-events: none;
-}
-
+/* Móvil: titular → texto y botones → collage */
 .rejilla {
-  position: relative;
   display: grid;
-  gap: clamp(2.25rem, 6vw, 3.5rem);
+  grid-template-areas:
+    "cabeza"
+    "texto"
+    "collage";
+  gap: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-/* ── Texto ── */
-
-.texto {
-  position: relative;
-  z-index: 1;
+.cabeza {
+  grid-area: cabeza;
   display: grid;
   justify-items: start;
-  gap: 1.5rem;
+  gap: 1.1rem;
 }
 
 .titulo {
   font-size: var(--t-display);
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: var(--tinta);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--azul-800);
 }
 
-/* Una palabra (o grupo) por línea; en tableta, una frase por línea */
+/* Una palabra (o grupo) por línea en pantallas estrechas; una frase por línea en escritorio */
 .frase,
 .frase > span {
   display: block;
 }
 
 .segunda {
-  color: var(--azul-800);
+  color: var(--tinta);
 }
 
-/* Rótulo: dos líneas fijas en pantallas estrechas */
-.trozo {
-  display: block;
+.texto {
+  grid-area: texto;
+  display: grid;
+  align-content: start;
+  gap: 1.5rem;
 }
 
-@media (min-width: 560px) {
-  .trozo {
-    display: inline;
+.entrada {
+  max-width: 34rem;
+  font-size: var(--t-lead);
+  line-height: 1.6;
+  color: var(--texto-2);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (max-width: 519px) {
+  .acciones {
+    display: grid;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+.datos {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--gris-200);
+}
+
+.datos li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--gris-200);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.datoIcono {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  color: var(--azul-800);
+}
+
+/* ── Collage fotográfico ── */
+
+.collage {
+  grid-area: collage;
+  position: relative;
+  isolation: isolate;
+  padding: 0 0 2.5rem;
+}
+
+.forma {
+  position: absolute;
+  z-index: -1;
+  inset: 12% -2rem 0 18%;
+  border-radius: var(--r-l);
+  background: var(--azul-100);
+}
+
+.fotoGrande {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gris-100);
+  border-radius: var(--r-l);
+  background: var(--blanco);
+  box-shadow: var(--sombra-2);
+}
+
+.fotoGrande img {
+  width: 100%;
+  height: auto;
+}
+
+.chip {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--gris-100);
+  border-radius: var(--pildora);
+  background: rgb(255 255 255 / 0.94);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  color: var(--azul-800);
+}
+
+.punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--verde-600);
+}
+
+.fotoPequena {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0;
+  width: 36%;
+  overflow: hidden;
+  border: 4px solid var(--blanco);
+  border-radius: var(--r-m);
+  background: var(--blanco);
+  box-shadow: var(--sombra-2);
+}
+
+.fotoPequena img {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .collage {
+    width: min(100%, 680px);
+    justify-self: center;
+  }
+
+  .fotoPequena {
+    width: 30%;
+    right: -1rem;
+  }
+}
+
+/* Escritorio: titular a lo ancho; debajo, collage a la izquierda y texto a la derecha */
+@media (min-width: 1024px) {
+  .rejilla {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas:
+      "cabeza cabeza cabeza cabeza cabeza cabeza cabeza cabeza cabeza cabeza cabeza cabeza"
+      "collage collage collage collage collage collage collage . texto texto texto texto";
+    column-gap: var(--col-gap);
+    row-gap: clamp(2rem, 3.5vw, 3rem);
+  }
+
   .frase {
     white-space: nowrap;
   }
@@ -77,268 +191,51 @@
   .frase > span {
     display: inline;
   }
-}
 
-.entrada {
-  max-width: 34rem;
-  font-size: var(--t-lead);
-  line-height: 1.55;
-  color: var(--gris-500);
-}
-
-.acciones {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-}
-
-@media (max-width: 519px) {
-  .acciones {
-    display: grid;
+  .collage {
     width: 100%;
-  }
-}
-
-/* ── Fotografía sobre bloque azul ── */
-
-.figura {
-  position: relative;
-  isolation: isolate;
-}
-
-.figura::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: -1.75rem;
-  bottom: 26%;
-  left: 14%;
-  right: calc(-1 * var(--gutter));
-  background:
-    repeating-linear-gradient(to right, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 48px),
-    repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 48px),
-    var(--azul-900);
-  border-left: 3px solid var(--verde-600);
-}
-
-.lamina {
-  margin-inline: 0.5rem;
-}
-
-/* ── Ruta y líneas de suministro ── */
-
-.base {
-  position: relative;
-  z-index: 1;
-  margin-top: clamp(0.5rem, 2vw, 1.25rem);
-}
-
-.ruta {
-  margin-bottom: -1px;
-}
-
-.lineas {
-  display: grid;
-  border-top: 1px solid transparent;
-}
-
-.lineasTitulo {
-  padding: 1.25rem 0 0.25rem;
-  font-size: var(--t-label);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gris-500);
-}
-
-.lineas ol {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.linea {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 0.25rem 0.75rem;
-  min-height: 64px;
-  padding: 0.85rem 0.25rem;
-  border-bottom: 1px solid var(--gris-200);
-  font-weight: 700;
-  font-size: 0.9375rem;
-  line-height: 1.25;
-  color: var(--tinta);
-  text-decoration: none;
-  transition:
-    color 0.25s var(--ease),
-    background-color 0.25s var(--ease);
-}
-
-.lineas li:nth-child(odd) .linea {
-  padding-right: 0.75rem;
-}
-
-.lineas li:nth-child(even) .linea {
-  padding-left: 0.75rem;
-  border-left: 1px solid var(--gris-200);
-}
-
-.indice {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--verde-700);
-  font-variant-numeric: tabular-nums;
-}
-
-.flecha {
-  width: 18px;
-  height: 18px;
-  color: var(--azul-800);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition:
-    opacity 0.3s var(--ease),
-    transform 0.3s var(--ease);
-}
-
-@media (hover: hover) {
-  .linea:hover {
-    color: var(--azul-800);
+    padding-bottom: 3rem;
   }
 
-  .linea:hover .flecha {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.linea:focus-visible .flecha {
-  opacity: 1;
-  transform: none;
-}
-
-/* Móvil y tableta: 2×2 compacto, número sobre el nombre (sin flecha) */
-@media (max-width: 1023px) {
-  .linea {
-    grid-template-columns: minmax(0, 1fr);
-    align-content: center;
-    gap: 0.15rem;
-    min-height: 60px;
-    padding-block: 0.7rem;
-    font-size: 0.875rem;
+  .forma {
+    inset: 14% -3rem 0 22%;
   }
 
-  .flecha {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) {
-  .reticula {
-    --columnas: 6;
-  }
-
-  /* Tableta: la lámina no ocupa todo el ancho; se alinea a la derecha sobre el bloque azul */
-  .figura {
-    width: min(100%, 600px);
-    margin-left: auto;
-  }
-}
-
-@media (min-width: 1024px) {
-  .reticula {
-    --columnas: 12;
-  }
-
-  .rejilla {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: var(--col-gap);
-    align-items: center;
+  .fotoPequena {
+    width: 32%;
+    right: -1.5rem;
   }
 
   .texto {
-    grid-column: 1 / span 6;
-    padding-block: 1rem 2.5rem;
+    align-self: center;
+    gap: 1.75rem;
   }
 
-  .figura {
-    grid-column: 7 / -1;
-    align-self: end;
-  }
-
-  .figura::before {
-    top: -2.5rem;
-    left: 26%;
-    bottom: 30%;
-    /* hasta el borde derecho de la ventana, aunque el contenedor sea más estrecho */
-    right: calc(-1 * var(--gutter) - max(0px, (100vw - var(--max)) / 2));
-  }
-
-  .lamina {
-    margin-inline: 0;
-  }
-
-  .lineas {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 4fr);
-    align-items: stretch;
-  }
-
-  .lineasTitulo {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    border-bottom: 1px solid var(--gris-200);
-  }
-
-  .lineas ol {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .lineas li .linea,
-  .lineas li:nth-child(odd) .linea,
-  .lineas li:nth-child(even) .linea {
-    min-height: 76px;
-    padding: 1rem 1.25rem;
-    border-left: 1px solid var(--gris-200);
+  .acciones {
+    display: grid;
+    justify-items: start;
   }
 }
 
 /* Entrada al retirarse la pantalla de carga: solo desplazamiento (sin
    opacidad), para que el texto principal cuente como pintado desde el inicio */
 @media (prefers-reduced-motion: no-preference) {
-  :global(:is(html.intro-sale, html.intro-vista)) .texto > * {
+  :global(:is(html.intro-sale, html.intro-vista)) .cabeza,
+  :global(:is(html.intro-sale, html.intro-vista)) .texto {
     animation: subir 0.9s var(--ease) both;
   }
 
-  :global(:is(html.intro-sale, html.intro-vista)) .texto > :nth-child(2) {
-    animation-delay: 0.06s;
+  :global(:is(html.intro-sale, html.intro-vista)) .texto {
+    animation-delay: 0.1s;
   }
 
-  :global(:is(html.intro-sale, html.intro-vista)) .texto > :nth-child(3) {
-    animation-delay: 0.12s;
-  }
-
-  :global(:is(html.intro-sale, html.intro-vista)) .texto > :nth-child(4) {
-    animation-delay: 0.18s;
-  }
-
-  :global(:is(html.intro-sale, html.intro-vista)) .lamina {
-    animation: revelar 1.1s var(--ease-in-out) 0.1s both;
+  :global(:is(html.intro-sale, html.intro-vista)) .fotoPequena {
+    animation: subir 1s var(--ease) 0.25s both;
   }
 }
 
 @keyframes subir {
   from {
-    transform: translateY(26px);
-  }
-}
-
-@keyframes revelar {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(-12px);
+    transform: translateY(24px);
   }
 }

@@ -1,7 +1,7 @@
 import { canales, sitio } from "@/config/sitio";
 import { soluciones } from "@/content/soluciones";
 import { Logo } from "@/components/marca/Logo";
-import { Ruta } from "@/components/ui/Ruta";
+import { Boton } from "@/components/ui/Boton";
 import { navegacion } from "./navegacion";
 import s from "./Pie.module.css";
 
@@ -9,38 +9,31 @@ export function Pie() {
   const lista = canales().filter((c) => c.href);
   const { nit, politicaDatos } = sitio.legal;
   const anio = new Date().getFullYear();
+  const empresa = navegacion.filter((n) => n.id !== "soluciones");
 
   return (
     <footer className={`oscuro ${s.pie}`}>
       <div className="contenedor">
-        <Ruta posicion={0.1} tono="oscuro" className={s.ruta} />
-
-        <div className={s.rejilla}>
+        <div className={s.superior}>
           <div className={s.marca}>
             <a href="#inicio" className={s.logo} aria-label="MPST, volver al inicio">
               <Logo sizes="140px" decorativo />
             </a>
             <p className={s.descripcion}>
-              {sitio.razonSocial}. Distribución de medicamentos, dispositivos médicos, material quirúrgico e insumos
-              hospitalarios para el sector salud en {sitio.pais}.
+              Distribución de medicamentos, dispositivos médicos, material quirúrgico e insumos hospitalarios para el
+              sector salud en {sitio.pais}.
             </p>
           </div>
+          <Boton href="#cotizacion" variante="claro" className={s.cta}>
+            Solicitar cotización
+          </Boton>
+        </div>
 
-          <nav aria-labelledby="pie-navegacion" className={s.columna}>
-            <h2 id="pie-navegacion" className={s.tituloColumna}>
-              Navegación
+        <div className={s.rejilla}>
+          <nav aria-labelledby="pie-soluciones" className={s.columna}>
+            <h2 id="pie-soluciones" className={s.tituloColumna}>
+              Soluciones
             </h2>
-            <ul role="list">
-              {navegacion.map((n) => (
-                <li key={n.id}>
-                  <a href={`#${n.id}`}>{n.texto}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className={s.columna}>
-            <h2 className={s.tituloColumna}>Soluciones</h2>
             <ul role="list">
               {soluciones.map((x) => (
                 <li key={x.id}>
@@ -48,7 +41,20 @@ export function Pie() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
+
+          <nav aria-labelledby="pie-empresa" className={s.columna}>
+            <h2 id="pie-empresa" className={s.tituloColumna}>
+              Empresa
+            </h2>
+            <ul role="list">
+              {empresa.map((n) => (
+                <li key={n.id}>
+                  <a href={`#${n.id}`}>{n.texto}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <div className={s.columna}>
             <h2 className={s.tituloColumna}>Contacto</h2>
@@ -64,9 +70,10 @@ export function Pie() {
                 <li className={s.texto}>{[sitio.contacto.direccion, sitio.contacto.ciudad].filter(Boolean).join(", ")}</li>
               ) : null}
               <li>
-                <a href="#cotizacion" className={s.cotizar}>
-                  Solicitar cotización
-                </a>
+                <a href="#cotizacion">Formulario de cotización</a>
+              </li>
+              <li>
+                <a href="#cobertura">Consultar cobertura</a>
               </li>
             </ul>
           </div>

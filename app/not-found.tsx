@@ -16,7 +16,7 @@ export default function NoEncontrada() {
         display: "grid",
         placeItems: "center",
         padding: "2rem var(--gutter)",
-        background: "var(--gris-50)",
+        background: "var(--azul-50)",
         textAlign: "center",
       }}
     >
@@ -28,7 +28,7 @@ export default function NoEncontrada() {
           <Pulso />
         </span>
         <h1 style={{ fontSize: "var(--t-h2)", color: "var(--azul-900)" }}>Esta página no existe</h1>
-        <p style={{ color: "var(--gris-500)" }}>La dirección no corresponde a ninguna sección de la web de MPST.</p>
+        <p style={{ color: "var(--texto-2)" }}>La dirección no corresponde a ninguna sección de la web de MPST.</p>
         <Link
           href="/"
           style={{ fontWeight: 700, color: "var(--verde-700)", minHeight: 44, display: "inline-flex", alignItems: "center" }}

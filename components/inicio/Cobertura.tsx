@@ -1,12 +1,13 @@
 import { sitio } from "@/config/sitio";
-import { Etiqueta } from "@/components/ui/Pulso";
+import { vistazo } from "@/content/marca";
+import { IconoLinea } from "@/components/ui/IconosLinea";
 import { ConsultaCobertura } from "./ConsultaCobertura";
 import s from "./Cobertura.module.css";
 
 /**
- * Cobertura sin mapas ni zonas supuestas: muestra solo lo confirmado en
- * config/sitio.ts (sede y ciudades atendidas) y ofrece consultar la
- * disponibilidad para una ciudad concreta.
+ * «MPST de un vistazo»: presencia y consulta de cobertura junto a tarjetas
+ * con datos confirmados. Sin mapas ni zonas supuestas: la sede y las ciudades
+ * atendidas solo aparecen cuando están en config/sitio.ts.
  */
 export function Cobertura() {
   const { ciudad } = sitio.contacto;
@@ -14,43 +15,63 @@ export function Cobertura() {
 
   return (
     <section id="cobertura" data-nav="cobertura" className={`seccion ${s.cobertura}`} aria-labelledby="titulo-cobertura">
-      <div className={`contenedor ${s.rejilla}`}>
-        <div className={s.texto} data-revelar>
-          <Etiqueta>Cobertura</Etiqueta>
+      <div className="contenedor">
+        <header className={s.cabeza} data-revelar>
+          <p className="antetitulo">Cobertura</p>
           <h2 id="titulo-cobertura" className="titulo-seccion">
-            ¿Dónde está tu institución?
+            MPST de un vistazo
           </h2>
-          <p className="entrada">
-            MPST opera en {sitio.pais}. Indícanos la ciudad o el municipio de entrega y te confirmamos la
-            disponibilidad para tu zona.
-          </p>
+        </header>
 
-          {ciudad || confirmadas.length ? (
-            <dl className={s.datos}>
-              {ciudad ? (
-                <div>
-                  <dt>Sede</dt>
-                  <dd>{ciudad}</dd>
-                </div>
-              ) : null}
-              {confirmadas.length ? (
-                <div>
-                  <dt>Cobertura confirmada</dt>
-                  <dd>
-                    <ul role="list" className={s.ciudades}>
-                      {confirmadas.map((c) => (
-                        <li key={c}>{c}</li>
-                      ))}
-                    </ul>
-                  </dd>
-                </div>
-              ) : null}
-            </dl>
-          ) : null}
-        </div>
+        <div className={s.panel} data-revelar style={{ "--retardo": "0.08s" } as React.CSSProperties}>
+          <div className={s.presencia}>
+            <IconoLinea nombre="presencia" className={s.iconoGrande} />
+            <h3 className={s.presenciaTitulo}>Presencia en {sitio.pais}</h3>
+            <p className={s.presenciaTexto}>
+              Indícanos la ciudad o el municipio de entrega y te confirmamos la disponibilidad para tu zona.
+            </p>
 
-        <div className={s.consulta} data-revelar style={{ "--retardo": "0.1s" } as React.CSSProperties}>
-          <ConsultaCobertura origen={ciudad ? `MPST · ${ciudad}` : `MPST · ${sitio.pais}`} />
+            {ciudad || confirmadas.length ? (
+              <dl className={s.datos}>
+                {ciudad ? (
+                  <div>
+                    <dt>Sede</dt>
+                    <dd>{ciudad}</dd>
+                  </div>
+                ) : null}
+                {confirmadas.length ? (
+                  <div>
+                    <dt>Cobertura confirmada</dt>
+                    <dd>
+                      <ul role="list" className={s.ciudades}>
+                        {confirmadas.map((c) => (
+                          <li key={c}>{c}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            ) : null}
+
+            <ConsultaCobertura />
+          </div>
+
+          <ul role="list" className={s.tarjetas}>
+            {vistazo.map((v) => (
+              <li key={v.titulo} className={s.tarjeta}>
+                <div className={s.tarjetaCabeza}>
+                  <IconoLinea nombre={v.icono} className={s.icono} />
+                  <h3 className={s.tarjetaTitulo}>{v.titulo}</h3>
+                </div>
+                <ul role="list" className={s.detalle}>
+                  {v.detalle.map((d) => (
+                    <li key={d}>{d}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

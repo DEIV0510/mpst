@@ -1,28 +1,26 @@
 .pie {
-  padding-block: clamp(3rem, 2rem + 4vw, 5rem) 2rem;
-  background: var(--azul-950);
+  padding-block: clamp(3rem, 2rem + 4vw, 4.5rem) 2rem;
+  background: var(--azul-900);
 }
 
-.ruta {
-  margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem);
-}
-
-.rejilla {
+/* Logotipo, descripción y llamada a la acción */
+.superior {
   display: grid;
-  gap: 2.5rem 1.5rem;
-  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  padding-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+  border-bottom: 1px solid rgb(255 255 255 / 0.12);
 }
 
 .marca {
-  grid-column: 1 / -1;
   display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
   gap: 1.25rem;
-  align-content: start;
 }
 
 .logo {
   display: block;
-  width: 96px;
+  width: 76px;
   border-radius: 50%;
 }
 
@@ -32,24 +30,35 @@
 }
 
 .descripcion {
-  max-width: 26rem;
+  max-width: 34rem;
   font-size: var(--t-small);
   line-height: 1.6;
-  color: var(--azul-300);
+  color: var(--azul-200);
+}
+
+.cta {
+  justify-self: start;
+}
+
+/* Columnas de enlaces */
+.rejilla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 1.5rem;
+  padding-block: clamp(2rem, 1.5rem + 2vw, 3rem);
 }
 
 .tituloColumna {
-  margin-bottom: 1rem;
-  font-size: var(--t-label);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--azul-300);
+  margin-bottom: 0.75rem;
+  font-size: var(--t-small);
+  font-weight: 650;
+  letter-spacing: 0;
+  color: var(--azul-200);
 }
 
 .columna ul {
   display: grid;
-  gap: 0.15rem;
+  gap: 0.1rem;
 }
 
 .columna a {
@@ -71,13 +80,9 @@
 }
 
 .texto {
-  padding-block: 0.5rem;
+  padding-block: 0.6rem;
   font-size: 0.9375rem;
-  color: var(--azul-300);
-}
-
-.columna a.cotizar {
-  color: var(--verde-400);
+  color: var(--azul-200);
 }
 
 .legal {
@@ -85,11 +90,10 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.75rem 2rem;
-  margin-top: clamp(2.5rem, 2rem + 3vw, 4rem);
   padding-top: 1.5rem;
   border-top: 1px solid rgb(255 255 255 / 0.12);
   font-size: 0.8125rem;
-  color: var(--azul-300);
+  color: var(--azul-200);
 }
 
 .legal a {
@@ -97,6 +101,11 @@
 }
 
 @media (min-width: 768px) {
+  .superior {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
   .rejilla {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -104,11 +113,8 @@
 
 @media (min-width: 1024px) {
   .rejilla {
-    grid-template-columns: minmax(0, 5fr) repeat(3, minmax(0, 2.4fr));
-    column-gap: var(--col-gap);
-  }
-
-  .marca {
-    grid-column: auto;
+    grid-template-columns: repeat(3, minmax(0, 14rem));
+    justify-content: start;
+    column-gap: clamp(3rem, 6vw, 6rem);
   }
 }

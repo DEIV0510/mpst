@@ -4,131 +4,122 @@
 
 .apertura {
   display: grid;
-  gap: clamp(3rem, 8vw, 4rem);
-}
-
-.declaracion {
-  display: grid;
-  gap: 1.25rem;
-  align-content: start;
-}
-
-.titulo {
-  max-width: 17ch;
-}
-
-/* Dos prendas como láminas superpuestas, con desfase vertical */
-.dotacion {
-  position: relative;
-  display: grid;
-  grid-template-columns: 58fr 42fr;
-  align-items: end;
-  max-width: 560px;
-  padding-bottom: 1rem;
-}
-
-.polo {
-  grid-column: 1;
-  grid-row: 1;
-  z-index: 1;
-}
-
-.segunda {
-  grid-column: 2;
-  grid-row: 1;
-  margin-left: -14%;
-  margin-bottom: -1rem;
-  z-index: 2;
-}
-
-/* ── Principios: filas editoriales de gran formato ── */
-
-.principios {
-  margin-top: clamp(3.5rem, 2rem + 6vw, 6.5rem);
-  border-bottom: 1px solid var(--gris-200);
-}
-
-.principio {
-  position: relative;
-  display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 0.35rem 0.75rem;
-  align-items: baseline;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--gris-200);
-}
-
-/* Trazo verde que recorre la fila al señalarla */
-.principio::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -1px;
-  height: 2px;
-  background: var(--verde-600);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform 0.7s var(--ease);
-}
-
-.numero {
-  font-size: 0.8125rem;
-  font-weight: 800;
-  color: var(--verde-700);
-  font-variant-numeric: tabular-nums;
-}
-
-.palabra {
-  font-size: clamp(2.125rem, 1.3rem + 3.6vw, 4.5rem);
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: var(--azul-900);
-  transition: color 0.35s var(--ease);
+  gap: clamp(2rem, 5vw, 3rem);
+  align-items: center;
 }
 
 .texto {
-  grid-column: 2;
-  max-width: 30rem;
-  color: var(--gris-500);
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
 }
 
-@media (hover: hover) {
-  .principio:hover::before {
-    transform: scaleX(1);
+/* Dotación sobre un panel tintado, con la leyenda debajo */
+.equipo {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: var(--r-l);
+  background: var(--azul-50);
+}
+
+.prendas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.prenda {
+  overflow: hidden;
+  border-radius: var(--r-m);
+  background: var(--blanco);
+  box-shadow: var(--sombra-1);
+}
+
+.prenda img {
+  width: 100%;
+  height: auto;
+}
+
+.leyenda {
+  margin-top: 0.9rem;
+  font-size: var(--t-small);
+  font-weight: 600;
+  color: var(--azul-700);
+  text-align: center;
+}
+
+/* ── Valores: columnas con icono de línea y separadores ── */
+
+.valores {
+  display: grid;
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+  border-top: 1px solid var(--gris-200);
+}
+
+.valor {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--gris-200);
+}
+
+.icono {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0.4rem;
+  color: var(--azul-800);
+}
+
+.nombre {
+  font-size: var(--t-h3);
+  color: var(--azul-800);
+}
+
+.descripcion {
+  color: var(--texto-2);
+}
+
+@media (max-width: 639px) {
+  .valor {
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 1rem;
+    row-gap: 0.3rem;
+    padding-block: 1.4rem;
   }
 
-  .principio:hover .palabra {
-    color: var(--azul-800);
+  .icono {
+    grid-row: 1 / span 2;
+    margin-bottom: 0;
   }
 }
 
-@media (min-width: 768px) {
-  .principio {
-    grid-template-columns: 4rem minmax(0, 7fr) minmax(0, 4fr);
-    align-items: center;
-    padding: 1.75rem 0;
-  }
-
-  .texto {
-    grid-column: 3;
+@media (min-width: 640px) {
+  .valores {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--col-gap);
   }
 }
 
 @media (min-width: 1024px) {
   .apertura {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: var(--col-gap);
-    align-items: center;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: clamp(2rem, 5vw, 5rem);
   }
 
-  .declaracion {
-    grid-column: 1 / span 7;
+  .valores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 0;
+    border-bottom: 1px solid var(--gris-200);
   }
 
-  .dotacion {
-    grid-column: 8 / -1;
-    justify-self: end;
-    width: 100%;
+  .valor {
+    padding: 2rem 2rem 2.25rem;
+    border-bottom: 0;
+    border-left: 1px solid var(--gris-200);
+  }
+
+  .valor:first-child {
+    padding-left: 0;
+    border-left: 0;
   }
 }

@@ -2,17 +2,16 @@
 
 import { useState } from "react";
 import { IconoAlerta, IconoFlecha } from "@/components/ui/Iconos";
-import { TRAZO_PULSO } from "@/components/ui/Pulso";
 import { EVENTO_COBERTURA } from "./eventos";
 import b from "@/components/ui/Boton.module.css";
-import s from "./Cobertura.module.css";
+import s from "./ConsultaCobertura.module.css";
 
 /**
- * «Guía de ruta»: origen MPST → destino escrito por el visitante. Al enviar,
- * lleva al formulario de cotización con la ciudad ya incluida en el mensaje.
- * Sin JavaScript funciona como enlace con ?ciudad= que el formulario lee.
+ * Consulta de cobertura: el visitante escribe su ciudad y pasa al formulario
+ * de cotización con la ciudad ya incluida en el mensaje. Sin JavaScript lleva
+ * igualmente al formulario (#cotizacion).
  */
-export function ConsultaCobertura({ origen }: { origen: string }) {
+export function ConsultaCobertura() {
   const [ciudad, setCiudad] = useState("");
   const [error, setError] = useState("");
 
@@ -36,41 +35,32 @@ export function ConsultaCobertura({ origen }: { origen: string }) {
   }
 
   return (
-    <form className={s.guia} action="#cotizacion" method="get" onSubmit={enviar} noValidate>
-      <span className={s.marcas} aria-hidden="true" />
-      <div className={s.extremos}>
-        <div className={s.extremo}>
-          <span className={s.rotulo}>Origen</span>
-          <span className={s.valor}>{origen}</span>
-        </div>
-
-        <svg className={s.tramo} viewBox="0 0 120 40" fill="none" aria-hidden="true" focusable="false">
-          <path d={TRAZO_PULSO} />
-        </svg>
-
-        <div className={`${s.extremo} ${s.destino}`}>
-          <label htmlFor="cobertura-ciudad" className={s.rotulo}>
-            Destino
-          </label>
-          <input
-            id="cobertura-ciudad"
-            name="ciudad"
-            type="text"
-            className={s.campo}
-            placeholder="Ciudad o municipio"
-            autoComplete="address-level2"
-            maxLength={80}
-            value={ciudad}
-            onChange={(e) => {
-              setCiudad(e.target.value);
-              if (error) setError("");
-            }}
-            aria-invalid={error ? true : undefined}
-            aria-describedby={error ? "cobertura-error" : "cobertura-ayuda"}
-          />
-        </div>
+    <form className={s.consulta} action="#cotizacion" method="get" onSubmit={enviar} noValidate>
+      <label htmlFor="cobertura-ciudad" className={s.etiqueta}>
+        Ciudad o municipio de entrega
+      </label>
+      <div className={s.fila}>
+        <input
+          id="cobertura-ciudad"
+          name="ciudad"
+          type="text"
+          className={s.campo}
+          placeholder="Escribe aquí tu ciudad"
+          autoComplete="address-level2"
+          maxLength={80}
+          value={ciudad}
+          onChange={(e) => {
+            setCiudad(e.target.value);
+            if (error) setError("");
+          }}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? "cobertura-error" : "cobertura-ayuda"}
+        />
+        <button type="submit" className={`${b.boton} ${s.boton}`}>
+          <span>Consultar cobertura</span>
+          <IconoFlecha className={b.icono} />
+        </button>
       </div>
-
       {error ? (
         <p id="cobertura-error" className={s.error} role="alert">
           <IconoAlerta />
@@ -81,11 +71,6 @@ export function ConsultaCobertura({ origen }: { origen: string }) {
           Abriremos el formulario de cotización con tu ciudad ya incluida.
         </p>
       )}
-
-      <button type="submit" className={`${b.boton} ${s.boton}`}>
-        <span>Consultar cobertura</span>
-        <IconoFlecha className={b.icono} />
-      </button>
     </form>
   );
 }

@@ -1,6 +1,5 @@
 /**
- * La línea de ECG del logotipo de MPST, convertida en el signo gráfico de
- * la web: rótulos de sección, rutas y pantalla de carga.
+ * La línea de ECG del logotipo de MPST (pantalla de carga y página 404).
  *
  * Trazo en una caja de 120×40 con línea base en y=24:
  * onda P, descenso Q, pico R, valle S y onda T, como en el símbolo.
@@ -20,15 +19,5 @@ export function Pulso({ className, grosor = 2.4 }: { className?: string; grosor?
         pathLength={1}
       />
     </svg>
-  );
-}
-
-/** Rótulo de sección con el pulso a la izquierda. */
-export function Etiqueta({ children, className }: { children: React.ReactNode; className?: string }) {
-  return (
-    <p className={`etiqueta${className ? ` ${className}` : ""}`}>
-      <Pulso />
-      <span>{children}</span>
-    </p>
   );
 }
